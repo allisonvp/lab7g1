@@ -18,13 +18,14 @@ $(document).ready(function () {
                             $("#totalConfirmed").text(data.Global.totalConfirmed);
                             $("#totalDeaths").text(data.Global.totalDeaths);
                             $("#totalRecovered").text(data.Global.totalRecovered);
-
-                    
-                            var descConfirmTotales = data.Countries.TotalConfirmed;
-                            
+                            var lista = data.countries;
+                            var i;
+                            for (i=0; i < lista.length ; i++){
+                            var descConfirmTotales = data.Countries[i].totalConfirmed;
+                            }
                             console.log(descConfirmTotales);
                             descConfirmTotales.sort(function(a,b){return b-a;});
-                            var lista = data.countries;
+                            
                             lista.totalConfirmed=descConfirmTotales;
                             var contentHtml = "";
                             $.each(lista, function (i, c) {
