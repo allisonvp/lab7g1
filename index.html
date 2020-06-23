@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="#" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+    <div class="container mx-auto" style="width: 1200px; margin-top: 20px;">
+        <h1 class="mb-3">OMS - COVID-19</h1>
+        <hr />
+        <div>
+            <h3 id="titulo-resumen-global">Resumen Global - </h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nuevos Confirmados</td>
+                        <td id="newConfirmed"></td>
+                    </tr>
+                    <tr>
+                        <td>Nuevas Muertes</td>
+                        <td id="newDeaths"></td>
+                    </tr>
+                    <tr>
+                        <td>Nuevos Recuperados</td>
+                        <td id="newRecovered"></td>
+                    </tr>
+                    <tr>
+                        <td>Confirmados Totales</td>
+                        <td id="totalConfirmed"></td>
+                    </tr>
+                    <tr>
+                        <td>Muertes Totales</td>
+                        <td id="totalDeaths"></td>
+                    </tr>
+                    <tr>
+                        <td>Recuperados Totales</td>
+                        <td id="totalRecovered"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+
+        <h3>Lista de países </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Country</th>
+                    <th>Confirmados Totales</th>
+                    <th>Muertes Totales</th>
+                    <th>Recuperados Totales</th>
+                    <th>Nuevos Confirmados</th>
+                    <th>Nuevas Muertes</th>
+                    <th>Nuevos Recuperados</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+            <tbody id="body-paises">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
