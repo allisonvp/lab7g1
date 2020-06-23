@@ -9,35 +9,146 @@
     <link rel="stylesheet" href="./detallePais.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="./detallePais.js"></script>
+	<script type="text/javascript">
+		const urlParams = new URLSearchParams(window.location.search);
+		const name = urlParams.get('name');
+				
+		$(document).ready(function () {
+                $("#buscarForm").submit(function () {
+                    var pais = $("#name").val();
+                    $.ajax({
+                        method: "POST",
+						data: {id: name},
+                        dataType: "json",
+                        url: "https://restcountries.eu/rest/v2/name/" + pais.getName()
+                    }).done(function (data) {
+                        if (data.estado === "ok") {
+                            $("#capital").val(data.pais.capital);
+                            $("#population").val(data.pais.population);
+                            $("#region").val(data.pais.region);
+                            
+                        } else {
+                            console.log(data.msg);
+                            alert(data.msg);
+                        }
+                    }).fail(function (err) {
+                        var jsonData = err.responseJSON;
+                        console.log(jsonData.msg);
+                        alert(jsonData.msg);
+                    });
+                    return false;
+                });
+            });
+			
+			$(document).ready(function () {
+                $("#buscarForm2").submit(function () {
+                    var pais = $("#name").val();
+                    $.ajax({
+                        method: "GET",
+						data: {id: Country},
+                        dataType: "json",
+                        url: "https://api.covid19api.com/total/dayone/country/peru/status/confirmed"
+                    }).done(function (data) {
+                        if (data.estado === "ok") {
+                            $("#Date").val(data.pais.Date);
+                            $("#Cases").val(data.pais.Cases);
+                            
+                        } else {
+                            console.log(data.msg);
+                            alert(data.msg);
+                        }
+                    }).fail(function (err) {
+                        var jsonData = err.responseJSON;
+                        console.log(jsonData.msg);
+                        alert(jsonData.msg);
+                    });
+                    return false;
+                });
+            });
+	</script>
 </head>
 
 <body>
     <!-- <div class="div-body"> -->
     <div class="container mx-auto" style="width: 1200px; margin-top: 20px;">
         <div class=" div-titulo">
-            <h2 class="h2-titulo" id="titulo">Resusmen del país</h2>
-            <div class="div-bandera" id="bandera-div"></div>
+            <h2 class="h2-titulo" id="titulo">Resusmen del país</h2><h2 id="name"> Perú</h2>
+            <div class="div-bandera" id="bandera-div" ></div>
         </div>
         <hr />
-        <a class="btn btn-primary" role="button">Regresar al Resumen</a>
+        <a class="btn btn-primary" role="button" id="boton">Regresar al Resumen</a>
         <hr />
 
         <div>
             <div>
                 <!-- <h4 id="titulo-resumen-global">Características Socieconómicas </h4> -->
                 <table class="table">
+				<div class="form-group row">
+                    <label for="first_name" class="col-sm-4 col-form-label" >Característica</label>
+                    <div class="col-sm-8">
+                        <label for="first_name" class="col-sm-4 col-form-label" >Valor</label>
+                    </div>
+                </div>
+				<form id="buscarForm">
+                <div class="form-group row">
+                    <label for="capital" class="col-sm-4 col-form-label">Capital</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" id="capital" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="population" class="col-sm-4 col-form-label">Población</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" id="population" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="region" class="col-sm-4 col-form-label">Sub Región</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" id="region" value="">
+                    </div>
+                </div>
+				</form>
                 </table>
             </div>
         </div>
         <hr />
         <h4>Total de casos desde el día uno</h4>
         <!-- Este <a> es solo un ejemplo -->
-        <a id="redirect-grafico" class="btn btn-primary" href="../grafico/graficoEvolutivo.html" role="button">Ver
-            Gráfico</a>
+        <a id="redirect-grafico" class="btn btn-primary" href="../grafico/graficoEvolutivo.html" role="button" id="boton2">
+		Ver Gráfico</a>
         <hr />
 
         <table id="casos-pais" class="table">
+			<div class="form-group row">
+                    <label for="first_name" class="col-sm-4 col-form-label" >Fecha</label>
+                    <div class="col-sm-8">
+                        <label for="first_name" class="col-sm-4 col-form-label" >Total casos confirmados</label>
+                    </div>
+                </div>
+				
+				<form id="buscarForm2">
+                <div class="form-group row">
+                   <tr>
+				   <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" id="Date" value="">
+                    </div>
+					</tr>
+					<tr>
+                    <div class="col-sm-8">
+                        <input type="text" readonly class="form-control-plaintext" id="Cases" value="">
+                    </div>
+					</tr>
+                </div>
+				</form>
         </table>
+		
+		<script>
+			document.getElementById("bandera-div").innerHTML = '<img src="https://www.countryflags.io/PE/flat/64.png">';
+		document.getElementById("boton").innerHTML = '<a href="index.html">Regresar al Resumen</a>';
+		document.getElementById("boton2").innerHTML = '<a href="grafico/graficoEvolutivo.html">Ver Gráfico</a>';
+		
+		</script>
 </body>
 
 </html>
