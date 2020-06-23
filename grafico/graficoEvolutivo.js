@@ -2,10 +2,10 @@
 $(document).ready(function () {
 
     // TODO
-
-
+    const urlParams = new URLSearchParams(window.location.search);
+    var pais= urlParams.get('nombre');
     // TODO adecuar el url
-    var url = "";
+    var url = "https://api.covid19api.com/dayone/country/"+pais+"/status/confirmed";
 
 
     // set the dimensions and margins of the graph
@@ -44,7 +44,11 @@ $(document).ready(function () {
         // format the data
         //TODO Revisar este Formato, obtencion de elementos desde la web service
         data.forEach(function (d) {
+            console.log(d.Date);
+            console.log(formatDate(d.Date));
             d.date = parseTime(formatDate(d.Date));
+            console.log(d.Date);
+            
             d.cases = d.Cases;
         });
 
@@ -70,5 +74,16 @@ $(document).ready(function () {
 });
 
 function formatDate(date) {
-    // TODO adecuar la función de formateo de fecha
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + (d.getDate()+1),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+    // TODO
+    fullDa='' + day+ '-' + month +'-'+ year
+    return fullDa;
 }
